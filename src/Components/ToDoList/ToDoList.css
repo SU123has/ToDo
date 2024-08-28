@@ -1,0 +1,103 @@
+.to-do-list {
+  background-color: rgb(233, 238, 217);
+  min-height: 80vh;
+  min-width: 60vw;
+  border-radius: 30px;
+  padding: 30px;
+  box-shadow: 10px 10px 50px 10px black;
+}
+
+h1 {
+  text-align: left;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.input-field {
+  width: 60%;
+  padding: 5px 10px 5px 20px;
+  outline: none;
+  border-radius: 10px;
+  margin-right: 20px;
+  font-size: 1.5rem;
+  border: 2px solid transparent;
+}
+
+.input-field:focus {
+  border: 2px solid rgb(121, 166, 121);
+}
+
+.add-button {
+  background-color: green;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 999px;
+  outline: none;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: rgb(0, 93, 0);
+  transition: background-color 0.3s;
+}
+
+.task-container {
+  border-radius: 10px;
+  width: 90%;
+  margin: 20px auto;
+  background-color: rgb(151, 161, 136);
+}
+
+.task-container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 10px;
+}
+
+.taskRow {
+  list-style: none;
+  background-color: white;
+  padding: 5px 5px 5px 10px;
+  display: flex;
+  border-radius: 5px;
+}
+
+.taskRow span {
+  font-size: 1.4rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: left;
+  flex: 1;
+}
+
+.taskRow .delete-button {
+  background-color: red;
+  font-size: 1rem;
+  padding: 2px 10px;
+  margin: 0 5px;
+  color: white;
+}
+
+.taskRow .up-button,
+.taskRow .down-button {
+  background-color: lightseagreen;
+  font-size: 1rem;
+  padding: 2px 10px;
+  margin: 0 5px;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 999px;
+  outline: none;
+  border: none;
+  transition: all 0.3s;
+  height: 30px;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
