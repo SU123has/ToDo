@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./ToDoList.css";
 import toast, { Toaster } from "react-hot-toast";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const ToDoList = () => {
+  const [parent] = useAutoAnimate(); //add animations to task container
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
@@ -53,13 +55,20 @@ const ToDoList = () => {
     }
   };
 
+  const keyPressHandler = (event) => {
+    if (event.key === "Enter") {
+      addTaskHandler();
+    }
+  };
+
   let taskContainer = null;
   if (tasks.length > 0) {
     taskContainer = (
-      <ul>
+      <ul ref={parent}>
         {tasks.map((task, index) => {
           return (
-            <li key={index} className="taskRow">
+            // instead of keeping index as key, keep task as key so that it will be unique for everyone, keeping index as key changes the key for li when they are moved up and down
+            <li key={task} className="taskRow">
               <span>{task}</span>
               <button
                 className="delete-button btn"
@@ -96,6 +105,7 @@ const ToDoList = () => {
         value={newTask}
         onChange={(event) => inputChangeHandler(event)}
         type="text"
+        onKeyDown={keyPressHandler}
         placeholder="Add Task"
       />
       <button className="add-button" onClick={addTaskHandler}>
