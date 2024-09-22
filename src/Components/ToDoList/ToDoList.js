@@ -67,7 +67,7 @@ const ToDoList = () => {
       <ul ref={parent}>
         {tasks.map((task, index) => {
           return (
-            // instead of keeping index as key, keep task as key so that it will be unique for everyone, keeping index as key changes the key for li when they are moved up and down
+            // instead of keeping index as key, keep task as key so that it will be unique for everyone, keeping index as key changes the key for li when they are moved up and down, also we are not allowing duplicate tasks, which further ensures uniqueness of key
             <li key={task} className="taskRow">
               <span>{task}</span>
               <button
