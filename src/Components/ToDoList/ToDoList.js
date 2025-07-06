@@ -1,11 +1,13 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import "./ToDoList.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import useLocalStorage from "../../Hooks/useLocalStorage";
 
 const ToDoList = () => {
   const [parent] = useAutoAnimate(); //add animations to task container
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, updateTodos] = useState([]);
+  const [tasks, updateTodos] = useLocalStorage();
   const [newTask, setNewTask] = useState("");
 
   const inputChangeHandler = (event) => {
@@ -21,7 +23,7 @@ const ToDoList = () => {
       toast.error("Task already exists!");
     } else {
       if (newTask.trim() !== "") {
-        setTasks([...tasks, newTask]);
+        updateTodos([...tasks, newTask]);
         toast.success("Task added successfully!");
       } else {
         toast.error("Please enter something!");
@@ -33,7 +35,7 @@ const ToDoList = () => {
 
   const deleteTaskHandler = (index) => {
     const updatedTasks = tasks.filter((_, idx) => idx !== index);
-    setTasks(updatedTasks);
+    updateTodos(updatedTasks);
     toast.success("Task deleted successfully!");
   };
 
@@ -42,7 +44,7 @@ const ToDoList = () => {
       const task = tasks[index];
       const updatedTasks = tasks.filter((_, idx) => idx !== index);
       updatedTasks.splice(index - 1, 0, task);
-      setTasks(updatedTasks);
+      updateTodos(updatedTasks);
     }
   };
 
@@ -51,7 +53,7 @@ const ToDoList = () => {
       const task = tasks[index];
       const updatedTasks = tasks.filter((_, idx) => idx !== index);
       updatedTasks.splice(index + 1, 0, task);
-      setTasks(updatedTasks);
+      updateTodos(updatedTasks);
     }
   };
 
