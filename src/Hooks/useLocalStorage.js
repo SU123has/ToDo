@@ -1,21 +1,27 @@
 import { useState } from "react";
-const TASKS_KEY = "tasks";
 
-export default function useLocalStorage() {
-  const [tasks, setTasks] = useState(() => {
-    const storedTasks = localStorage.getItem(TASKS_KEY);
-    if (storedTasks) {
-      const initialTodos = JSON.parse(storedTasks);
-      return initialTodos;
+/**
+ * @param {string} key - The key under which the value is a stored in localStorage
+ * @param {T} initialValue - The initial value to use if nothing is found in localStorage
+ * @returns {{data: T, updatedData: (updatedData: T)=>void}} - An object containing the current value and a function to update it
+ */
+
+export default function useLocalStorage(key, initialValue) {
+  const [data, setData] = useState(() => {
+    const storedData = localStorage.getItem(key);
+    if (storedData) {
+      const initialData = JSON.parse(storedData);
+      return initialData;
     } else {
-      const intialTasks = [];
-      localStorage.setItem(TASKS_KEY, JSON.stringify(intialTasks));
+      const intialData = initialValue;
+      localStorage.setItem(key, JSON.stringify(intialData));
     }
   });
 
-  const updateTodos = (updatedTasks) => {
-    setTasks(updatedTasks);
-    localStorage.setItem(TASKS_KEY, JSON.stringify(updatedTasks));
+  const updateData = (updatedData) => {
+    setData(updatedData);
+    localStorage.setItem(key, JSON.stringify(updatedData));
   };
-  return [tasks, updateTodos];
+
+  return { data, updateData };
 }

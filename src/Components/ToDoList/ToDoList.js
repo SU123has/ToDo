@@ -6,8 +6,11 @@ import useLocalStorage from "../../Hooks/useLocalStorage";
 
 const ToDoList = () => {
   const [parent] = useAutoAnimate(); //add animations to task container
-  // const [tasks, updateTodos] = useState([]);
-  const [tasks, updateTodos] = useLocalStorage();
+
+  const { data: tasks, updatedData: updateTodos } = useLocalStorage(
+    "tasks",
+    []
+  );
   const [newTask, setNewTask] = useState("");
 
   const inputChangeHandler = (event) => {
@@ -21,13 +24,11 @@ const ToDoList = () => {
   const addTaskHandler = () => {
     if (checkDuplicate(newTask.trim())) {
       toast.error("Task already exists!");
+    } else if (newTask.trim() !== "") {
+      updateTodos([...tasks, newTask]);
+      toast.success("Task added successfully!");
     } else {
-      if (newTask.trim() !== "") {
-        updateTodos([...tasks, newTask]);
-        toast.success("Task added successfully!");
-      } else {
-        toast.error("Please enter something!");
-      }
+      toast.error("Please enter something!");
     }
 
     setNewTask("");
